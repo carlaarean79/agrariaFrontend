@@ -1,0 +1,42 @@
+.container-all-productos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.banner-productos {
+    background-image: url('https://i.ibb.co/XYDdn1K/IMG-20240714-111537.jpg');
+    opacity: 90%;
+}
+
+.banner-productos{
+    background-size: cover;
+    /* Asegura que la imagen cubra todo el contenedor */
+    background-position:top;
+    background-repeat: no-repeat;
+    /* Evita que la imagen se repita */
+    background-attachment: fixed;
+   height: 60vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+}
+
+.caption-productos{
+    background-color: rgba(217, 213, 213, 0.52);
+    width: 48%;
+    font-family: 'Pathway Gothic One-Regular';
+    margin: 330px 0px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+  
+}
+
+.caption-productos p{
+    font-size: 5rem;
+    text-align: center ;
+  
+}

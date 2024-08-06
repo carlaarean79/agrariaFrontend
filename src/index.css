@@ -1,0 +1,45 @@
+@font-face {
+  font-family: 'Pathway Gothic One-Regular';
+  src: url('./assets/Pathway_Gothic_One/PathwayGothicOne-Regular.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: "Odor Mean Chey", serif;
+  src: url('./assets/Odor_Mean_Chey/OdorMeanChey-Regular.ttf') format('opentype');
+}
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --color1: rgba(207, 202, 45, 1);
+  --color2: rgba(177, 173, 41, 1);
+  --color3:rgba(194, 146, 70, 0.8);
+  --color4: rgba(190, 158, 108, 0.8);
+  --color5:  rgba(245, 245, 245, 1);
+  --color6: rgba(128, 128, 128, 0.417);
+}
+ 
+
+
+body {
+  margin: 0;
+background-color:var(--color5) ;
+padding: 0;
+height: auto;
+width: 100%;
+
+}
+
+
+
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #070707;
+  
+  }
+  
+}

@@ -1,0 +1,31 @@
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centra las tarjetas horizontalmente */
+    gap: 16px; /* Margen entre las tarjetas */
+    padding: 16px; /* Añade un padding para evitar que las tarjetas toquen los bordes del contenedor */
+  }
+  
+  .cards-item {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 250px; /* Tamaño fijo de las tarjetas */
+    height: 250px; /* Tamaño fijo de las tarjetas */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Necesario para posicionar la imagen de forma absoluta */
+  }
+  
+  .cards-item img {
+    position: absolute; /* Posiciona la imagen de forma absoluta dentro del contenedor */
+    top: 50%; /* Centra verticalmente */
+    left: 50%; /* Centra horizontalmente */
+    width: 100%; /* Asegura que la imagen cubra todo el ancho del contenedor */
+    height: 100%; /* Asegura que la imagen cubra toda la altura del contenedor */
+    object-fit: cover; /* Ajusta la imagen para cubrir el contenedor sin distorsionarse */
+    transform: translate(-50%, -50%); /* Compensa el posicionamiento absoluto para centrar la imagen */
+  }
+  

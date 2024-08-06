@@ -1,0 +1,51 @@
+.container-all-slider {
+    margin: 0 5%;
+    height: 32rem; /* Altura del contenedor para asegurarse de que sea visible */
+    position: relative;
+    overflow: hidden;
+}
+
+.arrows {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(40%);
+    display: flex;
+    justify-content:center;
+    z-index: 1;
+    pointer-events: none; /* Permite que el arrastre funcione */
+}
+
+.arrows p {
+    font-size: 2rem;
+    pointer-events: auto; /* Permite que las flechas sean clicables */
+    cursor: none;
+    border-radius: 50%;
+    padding: 0.5rem;
+}
+
+.slider {
+    display: flex;
+    cursor: grab;
+    margin-left: -1rem;
+}
+
+.item {
+    height: 20rem;
+    width: 35rem;
+    display: flex;
+    justify-content: space-between;
+    overflow: visible;
+    position: relative;
+    
+}
+
+.item img {
+    min-width: 20rem;
+    min-height: auto;
+    pointer-events: none; /* Evita que se arrastre la imagen */
+    object-fit: cover; /* Asegura que las imágenes cubran el contenedor manteniendo la proporción */
+    margin: 0 5px;
+    padding: 20px;
+   border-radius: 30px;
+    }

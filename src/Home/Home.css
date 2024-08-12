@@ -22,13 +22,14 @@
     background-repeat: no-repeat;
     /* Evita que la imagen se repita */
     background-attachment: fixed;
-   height: 120vh;
+   height: 100vh;
     width: 100%;
     /* Asegúrate de que el contenedor ocupe todo el ancho */
     position: relative;
     overflow: hidden;
     margin: 0;
 }
+
 
 .caption {
     background-color: rgba(217, 213, 213, 0.52);
@@ -63,7 +64,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
+    height: 120vh;
     width: 100%;
     position: relative;
     margin: 10px;

@@ -1,0 +1,139 @@
+/* Modal.css */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  width: 70vw;
+  max-width: 90%;
+  max-height: 90%;
+  overflow-y: auto;
+}
+
+
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+border-radius: 100%;
+border:none;
+  cursor: pointer;
+}
+.icon-close{
+font-size: 1.4rem;
+}
+
+.desripcion{
+  width: 35vw;
+
+}
+.desripcion p{
+  text-align: justify;
+}
+
+.modal-product-details {
+  display: flex;
+  align-items: center;
+   height: auto;
+}
+
+.img {
+  width: 50vw;
+}
+.modal-product-image {
+  width: 80%;
+  max-height: 250px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.modal-product-info {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.modal-product-info h1,
+.modal-product-info h3 {
+    margin: 0;
+  line-height: 80px;
+
+}
+
+.modal-product-info h1, .quantity-control p {
+  font-family: 'Pathway Gothic One-Regular';
+}
+
+.modal-product-info h3 {
+  font-family: "Inika", serif;
+  font-size: 1.4rem;
+}
+
+.modal-product-quantity {
+  margin-top: 10px;
+  padding: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.add-to-cart-button {
+  margin-top: 20px;
+  padding: 10px;
+  width: 100%;
+  height: 40px;
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.quantity-control {
+  display: flex;
+  align-items: center;
+
+}
+.quantity-control p {
+  margin: 0; /* Elimina el margen por defecto del <p> */
+  margin-right: 10px; 
+  font-size: 1.2rem;
+}
+
+.circle-button {
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.quantity-value {
+  border:  solid 1px black;
+  width: 5vw;
+  text-align: center;
+  margin: 0 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+

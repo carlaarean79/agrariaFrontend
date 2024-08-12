@@ -8,6 +8,11 @@
   src: url('./assets/Odor_Mean_Chey/OdorMeanChey-Regular.ttf') format('opentype');
 }
 
+@font-face {
+  font-family: "Inika", serif;
+  src: url('./assets/Inika/Inika-Regular.ttf') format('opentype');
+}
+
 :root {
   font-synthesis: none;
   text-rendering: optimizeLegibility;

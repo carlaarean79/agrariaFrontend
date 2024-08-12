@@ -1,8 +1,5 @@
 .container-all-productos{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+     width: 100%;
 }
 
 .banner-productos {
@@ -28,7 +25,7 @@
     background-color: rgba(217, 213, 213, 0.52);
     width: 48%;
     font-family: 'Pathway Gothic One-Regular';
-    margin: 330px 0px;
+    margin: 230px 0px;
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -40,3 +37,13 @@
     text-align: center ;
   
 }
+
+.categorias h2 {
+    font-family: 'Pathway Gothic One-Regular';
+    font-size: 3rem;
+    padding: 10px;
+    translate: 120px;
+}
+
+
+  

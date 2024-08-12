@@ -1,0 +1,51 @@
+
+.container-all{
+height: 200vh;
+}
+.containerWave {
+    display: flex;
+    align-items: center; /* Alinea los elementos verticalmente en el centro */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    position: relative; /* Para poder ajustar la posición de los hijos */
+  }
+  
+  .wave, .wave-2, .wave-3 {
+    border-radius: 30% 300% 30% 300%/100% 100% 100% 100%;
+    z-index: 1; /* Controla la superposición de los divs */
+    position: relative; /* Para ajustar la posición individual */
+}
+.wave {
+    width: 50vw;
+    height: 50vh;
+    margin: 0 -10px; /* Negativo para superponer ligeramente */
+    background-color: rgb(139, 151, 3);
+}
+.wave-2{
+    width: 20vw;
+    height: 50vh;
+      background: rgb(70, 1, 1);
+      
+    }
+    
+    .wave-3{
+      background-color: green;
+    margin: 0 -10px; /* Negativo para superponer ligeramente */
+
+  }
+  
+  .wave:nth-child(1) {
+    top: -10px;
+    /* Ajusta la posición vertical del primer div */
+  }
+  
+  .wave-2:nth-child(2) {
+    top: -10px; /* Ajusta la posición vertical del segundo div */
+    z-index: 2; /* Lleva este div al frente */
+  }
+  
+  .wave-3:nth-child(3) {
+    top: -10px; /* Ajusta la posición vertical del tercer div */
+  }
+  
+
+

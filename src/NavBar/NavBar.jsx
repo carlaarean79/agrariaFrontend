@@ -6,7 +6,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 
 function NavBar() {
-const navigator = useNavigate();
+    const navigator = useNavigate();
     const btnClickContacto = (e) => {
         return navigator('/contacto');
     }
@@ -22,27 +22,18 @@ const navigator = useNavigate();
                     <h1>EESAN°1</h1>
                 </div>
 
-               
-                    <div className='texto-enlaces'>
-                        <NavLink to='/'> <h1>Nuestra Escuela</h1></NavLink>
-                        <NavLink to='productos'>  <h1>Productos</h1></NavLink>
-                        <NavLink to='carrito'> <h1><FaShoppingCart /></h1></NavLink>
 
-                        <div className='btn-contacto-login'>
-                            <Button btn={{ clase: "contactanos", texto: "Contactanos" }} btnClick={btnClickContacto} />
-                            <Button btn={{ clase: "login", texto: "Iniciar Sesión" }} btnClick={btnClickLogin} />
-                        </div>
+                <div className='texto-enlaces'>
+                    <NavLink to='/'> <h1>Nuestra Escuela</h1></NavLink>
+                    <NavLink to='productos'>  <h1>Productos</h1></NavLink>
+                    <NavLink to='carrito'> <h1><FaShoppingCart /></h1></NavLink>
+
+                    <div className='btn-contacto-login'>
+                        <Button btn={{ clase: "contactanos", texto: "Contactanos" }} btnClick={btnClickContacto} />
+                        <Button btn={{ clase: "login", texto: "Iniciar Sesión" }} btnClick={btnClickLogin} />
                     </div>
-               
-               {/*  <div className='texto-enlaces'>
-                    <h1>Nuestra Escuela</h1>
-                    <h1>Productos</h1>
-                    <h1><FaShoppingCart /></h1>
                 </div>
-                <div className='btn-contacto-login'>
-                    <Button btn={{ clase: "contactanos", texto: "Contactanos" }} btnClick={btnClick} />
-                    <Button btn={{ clase: "login", texto: "Iniciar Sesión" }} btnClick={btnClick} />
-                </div> */}
+
             </div>
             <div className='banner'>
                 <h1>Escuela de Educación Secundaria Agropecuaria N°1</h1>

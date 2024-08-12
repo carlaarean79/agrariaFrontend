@@ -1,6 +1,3 @@
-import { useContext, useEffect } from "react";
-import { contexto } from "../Contexto/Contexto";
-
 export const fetchGet = async (url) => {
 
     try {

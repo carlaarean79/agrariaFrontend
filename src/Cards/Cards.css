@@ -1,8 +1,8 @@
 .cards {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   width: 100%;
-
 }
 
 .cards-item {
@@ -15,7 +15,7 @@
   height: 30vh;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items:baseline;
   transition: transform 0.3s ease;
 }
 
@@ -24,17 +24,14 @@
   /* Asegura que la imagen cubra todo el ancho del contenedor */
   height: 100%;
   object-fit: cover;
- cursor: pointer;
-
+  cursor: pointer;
 }
-
 
 .titulo h1 {
   font-family: 'Pathway Gothic One-Regular';
   font-size: 1.5rem;
   padding-top: 5px;
 }
-
 
 .titulo p,
 .titulo h3 {
@@ -46,3 +43,19 @@
 .titulo h1 {
   font-weight: bold;
 }
+
+/* Estilos para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+  .titulo h1 {
+    font-size: 1.2rem;
+  }
+
+  .titulo p,
+  .titulo h3 {
+    font-size: 0.8rem;
+  }
+  .cards-item {
+    width: 40vw;
+  }
+}
+

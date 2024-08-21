@@ -1,0 +1,111 @@
+.h2-form-pedido{
+    font-family: 'Pathway Gothic One-Regular';
+    text-align: center;
+    font-size: 2.5rem;
+}
+.form-pedido {
+    display: flex;
+    height: 50vh;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.input-form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+}
+
+.input-form input {
+    border-radius: 8px;
+    border: 1px solid grey;
+    background-color: var(--color5);
+    width: 30vw;
+    margin: 5px;
+}
+
+.input-form label {
+    width: 20%; /* Ajusta el ancho del label */
+    text-align: left; /* Alinea el texto del label a la derecha */
+    margin-right: 10px; /* Añade un margen derecho para separar del input */
+    font-family: "Odor Mean Chey", serif;
+}
+.detalle-producto{
+       margin: 10px;
+    width: 50%;
+}
+.detalle-producto h3{
+    font-family: "Odor Mean Chey", serif;
+    font-size: 1rem;
+
+}
+
+.detalle-producto-ul{
+    min-height: 20vh ;
+    border: 1px solid grey;
+    background-color: var(--color5);
+    border-radius: 8px;
+}
+.container-btn {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Permite que los botones se muevan a la siguiente línea si no hay suficiente espacio */
+}
+
+.btn-pedido, .btn-cancelar {
+  
+    width: 40%; /* Ajusta el ancho para que ocupen menos espacio y quepan mejor en pantallas pequeñas */
+    height: 5vh;
+    padding: 5px;
+    color: rgb(5, 5, 5);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center; /* Asegura que el texto esté centrado */
+}
+
+.btn-pedido{
+    background-color: var(--color7);
+}
+.btn-cancelar {
+    background-color: var(--color8);
+  
+}
+.btn-cancelar:hover, .btn-pedido:hover{
+    background-color: var(--color4);
+}
+@media (max-width: 768px) {
+    .h2-form-pedido {
+    margin-top: 20vh;
+    }
+
+    .form-pedido{
+        height: 60vh;
+    }
+    .btn-pedido, .btn-cancelar {
+        width: 100%; /* En pantallas pequeñas, los botones ocuparán todo el ancho del contenedor */
+        margin-bottom: 10px; /* Espacio entre los botones en pantallas pequeñas */
+    }
+    .input-form{
+      flex-wrap: wrap;
+    }
+    .input-form{
+        width: 70%;
+    }
+    
+    .input-form input {
+        width: 40vw;
+     
+    }
+    .detalle-producto{
+        margin: 10px;
+     width: 70%;
+ }
+ 
+ 
+    
+    
+}

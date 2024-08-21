@@ -1,0 +1,94 @@
+/* FormContacto.css */
+.form-h1 {
+  text-align: center;
+  font-family: 'Pathway Gothic One-Regular';
+}
+
+.field {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  flex-direction: row; /* Logo a la izquierda en pantallas grandes */
+  padding: 20px; /* Añade un poco de padding para pantallas pequeñas */
+}
+
+.container-all-formulario {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px; /* Limita el ancho máximo del formulario */
+  padding: 20px;
+  background-color: #f9f9f9; /* Color de fondo para el formulario */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade una sombra para el efecto de profundidad */
+  border-radius: 8px; /* Bordes redondeados */
+}
+
+.container-all-formulario label {
+  margin-top: 10px;
+  font-family: Arial, sans-serif;
+}
+
+.container-all-formulario input,
+.container-all-formulario textarea {
+  margin-top: 5px;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.container-all-formulario input[type="submit"] {
+  margin-top: 20px;
+  padding: 10px 0;
+  background-color: var(--color8);
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.container-all-formulario input[type="submit"]:hover {
+  background-color: var(--color6);
+}
+
+.logo-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 20px; 
+  margin-left: 100px;
+}
+
+.logo-form-contacto {
+  width: 20vw; /* Tamaño del logo en pantallas grandes */
+}
+
+@media (max-width: 768px) {
+  .field {
+    flex-direction: column-reverse; /* Cambia la dirección a columna en pantallas pequeñas */
+    text-align: center;
+  }
+
+  .container-all-formulario {
+    max-width: 100%; /* El formulario ocupará todo el ancho disponible */
+    padding: 5px;
+  }
+
+  .logo-form {
+    margin-bottom: 20px; /* Añade un margen inferior para separar el logo del formulario */
+    margin-right: 0; 
+    margin-left: 0;
+  }
+
+  .logo-form-contacto {
+    width: 100px; /* Ajusta el tamaño del logo para pantallas pequeñas */
+  }
+
+  .form-h1 {
+    padding: 10px; /* Reduce el padding general */
+    margin-top: 20vh;
+  }
+
+
+}

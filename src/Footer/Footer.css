@@ -2,31 +2,28 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
+    padding: 20px; 
+    background-color: var(--color5);
 }
 
-.logo-footer img {
-    width: 50px;
+.logo-footer-img {
+    width: 60px;
     border-radius: 100%;
     margin-left: 50px;
+}
 
+.logo-nombre-footer {
+    width: 60px;
 }
 
 .logo-footer {
     display: flex;
-    align-items:center;
+    align-items: center;
+    justify-content: center;
     padding: 10px;
     width: 30%;
     transition: transform .3s;
     margin-right: 30px;
-
-}
-
-.logo-footer h1 {
-    font-size: 1rem;
-    font-family: 'Odor Mean Chey", serif';
-    font-weight: bold;
-    padding: 10px;
 }
 
 .texto-redes, .contacto {
@@ -38,5 +35,39 @@
 
 .seguinos p, .redes p, .contacto p {
     font-family: 'Pathway Gothic One-Regular';
+}
+
+/* Estilos para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+   
+   
+
+    .seguinos p, .redes p, .contacto p {
+        font-size: 0.9rem; /* Reduce el tamaño de la fuente en pantallas muy pequeñas */
+    }
+
+    .container-all-footer {
+        flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+    }
+
+    .logo-footer, .texto-redes, .contacto {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 20px; /* Añade espacio entre secciones */
+    }
+
+    .logo-footer img {
+        width: 80px;
+      
+    }
+
+    .texto-redes, .contacto {
+        flex-direction: column; /* Apila los elementos verticalmente */
+    }
+
+    .redes p {
+        margin: 5px 0;
+    }
 
 }
+  

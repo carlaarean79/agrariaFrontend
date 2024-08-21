@@ -1,0 +1,221 @@
+.navBar-container-all {
+    display: flex;
+    flex-direction: column;
+   
+}
+
+.navBar-container {
+    position: fixed;
+   top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--color5);
+    transition: transform 0.3s ease;
+    z-index: 1000; 
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+
+
+.navBar-container.open {
+    transform: translateX(0);
+}
+
+.menu-icon {
+   /*  display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 1.8rem;
+    cursor: pointer;
+    z-index: 1200; */
+    display: none;
+    cursor: pointer;
+}
+
+.logo {
+    width: 5vw;
+    border-radius: 100%;
+    transition: transform .3s;
+}
+
+.logo-nombre {
+    width: 6vw;
+    transition: transform .3s;
+    padding: 0;
+    margin: 0;
+}
+
+.logo-navBar {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    width: 30%;
+    transition: transform .3s;
+}
+
+.texto-enlaces {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 70%;
+}
+
+.texto-enlaces a, .texto-enlaces li {
+    text-decoration: none;
+    list-style-type: none;
+    color: black;
+}
+
+.texto-enlaces h1 {
+    font-size: 1.3rem;
+    font-family: 'Pathway Gothic One-Regular';
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+
+.carrito-icon {
+    position: relative;
+}
+
+.carrito-count {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background-color: red;
+    border-radius: 50%;
+    padding: 4px;
+    color: white;
+    font-size: 0.7rem;
+}
+
+.icon-whatsapp {
+    color: rgb(4, 245, 4);
+    font-size: 2rem;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.icon-whatsapp:hover {
+    zoom: 1px;
+    box-shadow: 2px 2px rgb(107, 149, 107);
+    height: 35px;
+}
+
+.btn-contacto-login {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 30%;
+    padding: 5px;
+}
+
+.banner {
+    position: relative;
+    margin-top: 20vh;
+    width: 100%;
+    background-color: rgba(217, 213, 213, 0.52);
+    padding: 5px;
+    text-align: center;
+    z-index: 100;
+}
+
+.banner h3,
+.banner h1 {
+    font-family: 'Pathway Gothic One-Regular';
+    color: rgba(64, 63, 63, 0.52);
+    margin: 10px;
+}
+
+.banner h1 {
+    font-size: 3rem;
+}
+
+.banner h3 {
+    font-size: 1.5rem;
+}
+@media(max-width: 768px) {
+    .navBar-container {
+        display: none;
+        cursor: pointer;
+        right: -100%;
+        z-index: 900;
+        /*    flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+      
+        background-color: #fff;
+        position: fixed;
+        top: 0;
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease;
+        z-index: 900; */
+    }
+    
+    .navBar-container.open {
+        height: 50vh;
+        width: 50%;
+        
+    }
+
+    .menu-icon {
+        display: block;
+     /*    position: fixed;
+        top: 20px;
+        right: 20px;
+        font-size: 1.8rem;
+        cursor: pointer;
+        z-index: 1200; */
+    }
+    .navBar-container.open {
+        right: 0;
+    }
+
+    .texto-enlaces,
+    .btn-contacto-login {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .banner {
+        margin-top: 100px;
+    }
+
+   
+
+    .texto-enlaces,
+    .btn-contacto-login {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    
+
+    .logo-navBar h1,
+    .texto-enlaces h1 {
+        font-size: 1rem;
+    }
+
+    .logo-nombre {
+        width: 12vw;
+    }
+
+    .banner h1 {
+        font-size: 2rem;
+    }
+
+    .banner h3 {
+        font-size: 1rem;
+    }
+
+   
+}

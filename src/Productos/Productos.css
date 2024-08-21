@@ -1,5 +1,6 @@
 .container-all-productos{
      width: 100%;
+    
 }
 
 .banner-productos {
@@ -19,6 +20,7 @@
     position: relative;
     overflow: hidden;
     margin: 0;
+   
 }
 
 .caption-productos{
@@ -45,5 +47,31 @@
     translate: 120px;
 }
 
-
+/* Estilos para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+    .categorias h2 {
+        font-size: 2rem;
+      
+    }
+  
+    .caption-productos p{
+        font-size: 3rem;
+        text-align: center ;
+    }
+    .caption-productos{
+        margin: 230px 0px;
+        width: 80%;
+    }
+    
+    .banner-productos{
+       height: 40vh;
+        width: 100%;
+        background-position:center;
+        background-size: cover;
+        margin-top: 100px;
+     
+       
+    }
+    
+  }
   

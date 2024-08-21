@@ -1,48 +1,47 @@
+/* General Styles */
 .navBar-container-all {
-    position: relative;
-
+    display: flex;
+    flex-direction: column;
+   
 }
 
 .navBar-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    /* Asegúrate de que la navbar esté por encima del banner */
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
     padding: 10px 20px;
-    /* Ajusta el padding según tu diseño */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    list-style: none;
     background-color: var(--color5);
+    transition: transform 0.3s ease;
+    position: fixed;
+    padding: 10px 20px;
+    margin: 0;
+    z-index: 1000; 
+}
+
+/* Estilos para los elementos internos */
+.logo-navBar {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    width: 30%;
+    transition: transform .3s;
 }
 
 .logo {
     width: 5vw;
     border-radius: 100%;
     transition: transform .3s;
-
 }
 
-.logo-navBar {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    width: 30%;
+.logo-nombre {
+    width: 6vw;
     transition: transform .3s;
-
+    padding: 0;
+    margin: 0;
 }
-
-.logo-navBar h1,
-.texto-enlaces h1 {
-    font-size: 1.3rem;
-    font-family: 'Odor Mean Chey", serif';
-    font-weight: bold;
-    padding: 10px;
-}
-
 .texto-enlaces {
     display: flex;
     justify-content: space-evenly;
@@ -50,42 +49,59 @@
     width: 70%;
 }
 
-.texto-enlaces a {
+.texto-enlaces a,.texto-enlaces li{
     text-decoration: none;
+    list-style-type: none;
     color: black;
 }
 
 .texto-enlaces h1 {
     font-size: 1.3rem;
     font-family: 'Pathway Gothic One-Regular';
-    padding: 5px 10px; /* Añadir padding para el efecto de fondo */
-    border-radius: 8px; /* Mantener el borde redondeado */
+    padding: 5px 10px;
+    border-radius: 8px;
 }
 
-.texto-enlaces h1:hover {
-    background-color: var(--color1);
-    box-shadow: 2px 2px rgba(128, 128, 128, 0.136);
+.carrito-icon {
+    position: relative;
 }
 
+.carrito-count {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background-color: red;
+    border-radius: 50%;
+    padding: 4px;
+    color: white;
+    font-size: 0.7rem;
+}
 
+.icon-whatsapp {
+    color: rgb(4, 245, 4);
+    font-size: 2rem;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.icon-whatsapp:hover {
+    zoom: 1px;
+    box-shadow: 2px 2px rgb(107, 149, 107);
+    height: 35px;
+}
 .btn-contacto-login {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    width: 40%;
+    width: 30%;
     padding: 5px;
 }
 
 .banner {
-    position: relative;
-    margin-top: 15vh;
-    width: 100%;
+ margin-top: 100px;
     background-color: rgba(217, 213, 213, 0.52);
-    /* Ajusta el color de fondo según tu diseño */
-    padding: 5px;
+    padding: 20px;
     text-align: center;
-    z-index: 500;
-
 }
 
 .banner h3,
@@ -93,7 +109,6 @@
     font-family: 'Pathway Gothic One-Regular';
     color: rgba(64, 63, 63, 0.52);
     margin: 10px;
-
 }
 
 .banner h1 {
@@ -104,18 +119,96 @@
     font-size: 1.5rem;
 }
 
-@media(max-width:700px) {
 
-    .logo-navBar h1,
-    .texto-enlaces h1 {
-        font-size: 1rem;
+
+/* Estilos específicos para pantallas móviles */
+@media (max-width: 768px) {
+    
+.menu-icon {
+    background-color: var(--color5);
+   max-height: 20vh;
+}
+    .icon-hamb {
+    font-size: 4rem; /* Cambia este valor al tamaño deseado */
+    width: 24px; /* Esto también cambia el tamaño del icono */
+    height: 24px;
+    margin: 10px;
+   
+    }
+    .navBar-container-all {
+       height: 5vh;
+       display: flex;
+       
+    }
+    /* Oculta la barra de navegación original en móviles por defecto */
+    .navBar-container {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: var(--color5);
+        padding: 20px 0;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        z-index: 150;
+        
+    }
+   
+    /* Muestra la barra de navegación cuando se abre el menú hamburguesa */
+    .navBar-container.open {
+        display: flex;
+        
+        
     }
 
-    .banner h1 {
-        font-size: 3rem;
+    .texto-enlaces {
+        flex-direction: column;
+        gap: 15px;
     }
 
-    .banner h3 {
-        font-size: 1.5rem;
+    .logo-nombre{
+        width: 20vw;
+    }
+    .btn-contacto-login {
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 15px;
+        width: 50vw;
+    }
+
+    .contactanos{
+        width: 100%;
+    }
+
+.banner {
+    margin-top: 5px;
+       background-color: rgba(217, 213, 213, 0.52);
+       padding: 20px;
+       text-align: center;
+       height: 15vh;
+   }
+
+.banner h3,
+.banner h1 {
+    font-family: 'Pathway Gothic One-Regular';
+    color: rgba(64, 63, 63, 0.52);
+    margin: 10px;
+}
+
+.banner h1 {
+    font-size: 1rem;
+}
+
+.banner h3 {
+    font-size: 0.5rem;
+}
+}
+
+/* Estilos específicos para pantallas de escritorio */
+@media (min-width: 769px) {
+    .navBar-container {
+        display: flex; /* Asegura que la barra de navegación sea visible en pantallas grandes */
     }
 }

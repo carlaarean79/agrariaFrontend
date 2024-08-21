@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Cards.css';
 import Modal from '../Modal/Modal';
+import { contexto } from '../Contexto/Contexto';
 
 function Cards({dato }) {
 const [modalOpen, setModalOpen] = useState(false);
 const [selectedProduct, setSelectedProduct] = useState(null);
 const [quantity, setQuantity] = useState(1);
+const {agregarAlCarrito} = useContext(contexto);
 
 if (!Array.isArray(dato)) {
   return <div>No hay productos para mostrar.</div>;
@@ -21,8 +23,25 @@ const handleIncrease = () => {
 };
 
 const handleDecrease = () => {
+  if (!selectedProduct) {
+    return;
+  }
+  
+  if (quantity <= 0) {
+    alert("Por favor, ingrese una cantidad antes de agregar al carrito.");
+    return;
+  }
   if (quantity > 1) {
     setQuantity(prevQuantity => prevQuantity - 1);
+  }
+};
+
+const handleAddToCart = () => {
+  if (!selectedProduct) {
+  } else {
+    agregarAlCarrito(selectedProduct, quantity);
+    setModalOpen(false); 
+    
   }
 };
   return (
@@ -36,7 +55,7 @@ const handleDecrease = () => {
             </div>
             <div className="titulo">
               <h1>{item.name}</h1>
-              <p>{item.descripcion}</p>
+              <p>{item.detalle}</p>
               <h3>$ {item.price}</h3>
             </div>
           </div>
@@ -58,7 +77,7 @@ const handleDecrease = () => {
                 <span className="quantity-value">{quantity}</span>
                 <button className="circle-button" onClick={handleIncrease}>+</button>
               </div>
-              <button className="add-to-cart-button">Add to Cart</button>
+              <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
             </div>
           </div>
             <div className='desripcion'>

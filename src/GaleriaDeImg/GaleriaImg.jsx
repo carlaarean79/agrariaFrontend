@@ -6,7 +6,7 @@ import './GaleriaImg.css'
 const GaleriaImg = () => {
   const { datos } = useContext(contexto);
   const [currentPage, setCurrentPage] = useState(1);
-  const imagesPerPage = 6;
+  const imagesPerPage = 3;
 
   // Calcula el total de pag. divide la cant. de img del contexto por las que quiero mostrar
   //math.ceil: redondea redondea hacia arriba al número entero más cercano.
@@ -31,7 +31,9 @@ const GaleriaImg = () => {
     <div className='container-all-galery'>
       <div className="image-gallery">
         {currentImages.map((imgEscuela, index) => (
-          <img key={index} src={imgEscuela.url} alt={imgEscuela.name} />
+          <div key={index} >
+          <img  src={imgEscuela.url} alt={imgEscuela.name} />
+          </div>
         ))}
       </div>
       <div className="pagination">

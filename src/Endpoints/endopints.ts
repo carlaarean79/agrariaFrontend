@@ -7,3 +7,5 @@ export const URL_USUARIOS = 'http://localhost:3000/users';
 export const URL_SERVICE_ID= 'http://localhost:3000/email/serviceId';
 export const URL_TEMPLATE_ID= 'http://localhost:3000/email/templateId';
 export const URL_USER_ID= 'http://localhost:3000/email/userId';
+export const URL_AUTH_LOGIN_ADMIN= 'http://localhost:3000/auth/login';
+export const URL_AUTH_PROFILE_ADMIN= 'http://localhost:3000/auth/profile';

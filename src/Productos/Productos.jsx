@@ -3,15 +3,14 @@ import './Productos.css';
 import { contexto } from '../Contexto/Contexto';
 import Cards from '../Cards/Cards';
 
-function Productos({categoria}) {
-  const {datos, setDatos} = useContext(contexto);
+function Productos({ categoria }) {
+  const { datos } = useContext(contexto);
   const [orderProducts, setOrderProducts] = useState([]);
 
   useEffect(() => {
-     const productsInOrderPerCategory = (productos) => {
-
+    const productsInOrderPerCategory = (productos) => {
       if (!Array.isArray(productos)) {
-        return []; // Devuelve un array vacío si productos no es un array
+        return [];
       }
 
       return productos.sort((a, b) => {
@@ -21,12 +20,11 @@ function Productos({categoria}) {
         if (nameA > nameB) return 1;
         return 0;
       });
-    }; 
+    };
 
     const groupProductsPerCategory = (productos) => {
       return productos.reduce((acc, producto) => {
-        const nameCategory =  producto.categoria.name;
-console.log(productos);
+        const nameCategory = producto.categoria.name;
 
         if (!acc[nameCategory]) {
           acc[nameCategory] = [];
@@ -39,13 +37,12 @@ console.log(productos);
 
     const orderProducts = productsInOrderPerCategory(datos.productos);
     const productPerCategory = groupProductsPerCategory(orderProducts);
-    setOrderProducts(productPerCategory); 
-
+    setOrderProducts(productPerCategory);
   }, [datos.productos, categoria]);
 
   return (
     <div className='container-all-productos'>
-       <div className="banner-productos">
+      <div className="banner-productos">
         <div className="caption-productos">
           <p className='titulo'>Nuestros Productos</p>
         </div>
@@ -63,8 +60,7 @@ console.log(productos);
             </div>
           </div>
         ))}
-      </div> 
-        
+      </div>
     </div>
   );
 }

@@ -14,8 +14,10 @@ function RealizarPedido() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const savePedido = async () => {
+  
+  const savePedido = async (userPrueba) => {
     try {
+      console.log(formData);
       const response = await fetch('http://localhost:3000/pedido', {
         method: 'POST',
         headers: {
@@ -24,18 +26,18 @@ function RealizarPedido() {
         body: JSON.stringify({
           fecha: new Date(),
           detalle: carrito.map(producto => `${producto.name}: ${producto.cantidad}`).join(', '),
-          user: formData, // Asegúrate de que este sea el usuario correcto
+          user: userPrueba, // Asegúrate de que este sea el usuario correcto
           pedidosProducto: carrito.map(producto => ({
             producto: producto.id,
             cantidad: producto.cantidad,
           })),
         }),
       });
-  
+      
       if (!response.ok) {
         throw new Error('Error al guardar el pedido');
       }
-  
+      
       const data = await response.json();
       console.log('Pedido guardado:', data);
       return data;
@@ -88,7 +90,10 @@ function RealizarPedido() {
     e.preventDefault();
     const usuarioData = await saveUsuario();
     if(usuarioData){
-      const pedidoData = await savePedido();
+      setFormData(usuarioData)
+      console.log(setFormData);
+      
+      const pedidoData = await savePedido(usuarioData);
 
       if (pedidoData ) {
         const phoneNumberData = await getPhoneNumber(); // Obtener el número de teléfono

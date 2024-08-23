@@ -10,4 +10,5 @@ NestJs, TypeOrm y MySql para el backend link to agraria-app back https://github.
 
 Link to prototype in Figma https://www.figma.com/proto/10loICHnYX2jEP4zgkmbCK/Untitled?node-id=1-2&t=IsDTplPxBOQxqwWW-1
 Sigo un diseño propio
-https://i.ibb.co/QHKLc2d/1.png
+
+![image](https://github.com/user-attachments/assets/0f8ca30b-c1cc-4b8b-a97a-748de69c616a)

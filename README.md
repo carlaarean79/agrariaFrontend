@@ -5,3 +5,5 @@ Este proyecto se basa en un comercio eléctrónico diseñado y desarrollado para
 Utilizo React para el frontend
 NestJs, TypeOrm y MySql para el backend link to agraria-app back https://github.com/carlaarean79/agraria_app
 
+Link to prototype in Figma https://www.figma.com/proto/10loICHnYX2jEP4zgkmbCK/Untitled?node-id=1-2&t=IsDTplPxBOQxqwWW-1
+Sigo un diseño propio

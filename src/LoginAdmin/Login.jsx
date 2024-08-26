@@ -2,12 +2,12 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Contexto/AuthContext";
 import { contexto } from "../Contexto/Contexto";
-
+import './Login.css';
 function Login() {
   const navigate = useNavigate();
   const { datos, setDatos } = useContext(contexto); // Añadido `setDatos` para actualizar el contexto
   const { login, fetchProfile } = useAuth();
-  const [loginData, setLoginData] = useState({ email: '', password: '', role: ''});
+  const [loginData, setLoginData] = useState({ email: '', password: '', role: '' });
   const { email, password, role } = loginData;
 
   const onChan = (e) => {
@@ -27,48 +27,52 @@ function Login() {
     try {
       const token = await login(email, password, role);
       const userProfile = await fetchProfile(token);
-      
+
       setDatos(datos => ({
         ...datos,
-        userActiv: userProfile
+        userActiv: userProfile,
+        refresh: true
       }));
-      
-      alert("Iniciaste sesión con éxito");
       navigate('/perfil/admin');
-     
+
+
     } catch (error) {
       alert(error.message);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="formulario">
-      <div>
-        <h1>Iniciar Sesión</h1>
-        <input
-          type="email"
-          name="email"
-          placeholder="Correo electrónico"
-          value={email}
-          onChange={onChan}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={onChan}
-        />
-        <input
-          type="text"
-          name="role"
-          placeholder="Rol"
-          value={role}
-          onChange={onChan}
-        />
-        <button>Iniciar Sesión</button>
-      </div>
-    </form>
+    <div className='container-all-login'>
+      <form onSubmit={handleSubmit} className="form-login">
+        <h2 className='h2-form-login'>INICIAR SESIÓN</h2>
+        <div className='input-form-login'>
+          <input
+            type="email"
+            name="email"
+            placeholder="Correo electrónico"
+            value={email}
+            onChange={onChan}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Contraseña"
+            value={password}
+            onChange={onChan}
+          />
+          <input
+            type="text"
+            name="role"
+            placeholder="Rol"
+            value={role}
+            onChange={onChan}
+          />
+        </div>
+        <div className='container-btn-login'>
+          <button className='btn-login' >Iniciar Sesión</button>
+        </div>
+      </form>
+    </div>
   );
 }
 

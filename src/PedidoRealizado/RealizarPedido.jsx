@@ -126,7 +126,7 @@ function RealizarPedido() {
   };
 
   return (
-    <div>
+    <div >
       <h2 className='h2-form-pedido'>Realizar Pedido</h2>
       <form onSubmit={handleSubmit} className='form-pedido'>
         <div className='input-form'>

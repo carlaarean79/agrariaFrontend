@@ -1,20 +1,42 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Button from '../Button/Button';
 import './NavBar.css';
-import { FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
+import { FaShoppingCart, FaBars, FaTimes, FaUser } from "react-icons/fa";
 import { NavLink, useNavigate } from 'react-router-dom';
 import { contexto } from '../Contexto/Contexto';
 import { FaWhatsapp } from "react-icons/fa";
-
+import { useAuth } from '../Contexto/AuthContext';
+import { FiLogOut } from 'react-icons/fi';
+import { NavDropdown } from 'react-bootstrap';
+import { GrUserAdmin } from "react-icons/gr";
+import { MdOutlineAddModerator } from "react-icons/md";
 function NavBar() {
     const navigator = useNavigate();
-    const { datos } = useContext(contexto);
+    const { datos, perfilReload } = useContext(contexto);
+    const { userActiv, perfil } = datos || {};
     const { carrito } = datos;
     const [menuOpen, setMenuOpen] = useState(false);
+    const { handleLogout } = useAuth();
+    const [clicked, setClicked] = useState(false);
+    const [menuDropdow, setMenuDropdow] = useState(false);
 
     const totalProductos = carrito.reduce((total, producto) => total + producto.cantidad, 0);
 
-    
+    useEffect(() => {
+        if (userActiv && !perfil) {
+            perfilReload();
+        }
+       
+    }, [userActiv, perfil])
+
+    useEffect(() => {
+        if (!clicked) {
+            setMenuDropdow(false)
+        }
+    }, [clicked])
+
+    const menuDropdowClose = () => setMenuDropdow(false);
+
     const btnClickContacto = () => {
         navigator('/contacto');
         handleLinkClick();
@@ -39,23 +61,23 @@ function NavBar() {
             return null;
         }
     };
-    
-      
-    const handleSubmitWhatsapp = async (e) => { 
-          const phoneNumberData = await getPhoneNumber(); // Obtener el número de teléfono
-    
-          if (phoneNumberData) { // Asegúrate de que el número se haya obtenido correctamente
+
+
+    const handleSubmitWhatsapp = async (e) => {
+        const phoneNumberData = await getPhoneNumber(); // Obtener el número de teléfono
+
+        if (phoneNumberData) { // Asegúrate de que el número se haya obtenido correctamente
             const whatsappLink = `https://wa.me/${phoneNumberData}?text=${encodeURIComponent('Hola quiero realizar la siguiente consulta:')}`;
             window.open(whatsappLink, '_blank');
-            
-          } else {
-              console.error('No se obtuvo el número de teléfono');
-          }
-      }
+
+        } else {
+            console.error('No se obtuvo el número de teléfono');
+        }
+    }
     return (
         <nav className='navBar-container-all'>
             <div className='menu-icon' onClick={toggleMenu}>
-                {menuOpen ? <FaTimes className='icon-hamb'/> : <FaBars className='icon-hamb'/>}
+                {menuOpen ? <FaTimes className='icon-hamb' /> : <FaBars className='icon-hamb' />}
             </div>
 
             <ul className={`navBar-container ${menuOpen ? 'open' : ''}`}>
@@ -78,10 +100,36 @@ function NavBar() {
                         </NavLink>
                     </li>
                 </div>
+                {userActiv ? (
+                    <div className="carrito-icon">
+                        <h5><GrUserAdmin className='icon-user' /></h5>
+                    </div>
+                ) : null}
+                {userActiv && userActiv.role === 'admin' ? (
+                    <NavDropdown
+                        id='menu-dropDown'
+                        title='Administración'
+                        menuVariant='grey'
+                        onToggle={() => setMenuDropdow(!menuDropdow)}
+                        show={menuDropdow}
+                        className="dropdown-side"
+                    >
+                        <li>
+                            <NavLink className='drop-item' to={'productos'} onClick={() => { menuDropdowClose(); setClicked(false) }}><MdOutlineAddModerator /> Administrar productos</NavLink>
+                        </li>
+                        <li>
+                            <NavLink className='drop-item' to={'perfil/admin'} onClick={() => { menuDropdowClose(); setClicked(false) }}><FaUser /> Perfil</NavLink>
+                        </li>
+                       {/*  <li>
+                            <NavLink ><FiLogOut onClick={handleLogout} /> Cerrar sesión</NavLink>
+                        </li> */}
+                    </NavDropdown>
+
+                ) : null}
 
                 <div className='btn-contacto-login'>
                     <Button btn={{ clase: "contactanos", texto: "Contactanos" }} btnClick={btnClickContacto} />
-                    <h1 className='icon-whatsapp'><FaWhatsapp  onClick={handleSubmitWhatsapp}/></h1>
+                    <h1 className='icon-whatsapp'><FaWhatsapp onClick={handleSubmitWhatsapp} /></h1>
                 </div>
             </ul>
 

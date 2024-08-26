@@ -63,14 +63,16 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem('token');
     setAuth({ token: null, user: null });
-    setDatos((prev) => ({
+    setDatos(prev => ({
       ...prev,
       userActiv: null,
-      token: null,
+      perfil: [],
       refresh: true
     }));
-    navigate('/ ');  
+    navigate('/');
+    window.location.reload();  // Forzar la recarga de la página
   };
+  
 
   return (
     <AuthContext.Provider value={{ auth, setAuth, login, fetchProfile, logout }}>

@@ -1,0 +1,93 @@
+.container-all-login {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center; /* Centra verticalmente */
+    height: 80vh; /* Asegura que el contenedor ocupe toda la altura de la pantalla */
+    padding: 10px; /* Asegura un pequeño espacio en los lados en pantallas más pequeñas */
+    width: 100%;
+  }
+  
+  .h2-form-login{
+  margin-bottom: 30px;
+  font-family: 'Pathway Gothic One-Regular';
+  }
+
+  .form-login {
+    display: flex;
+    flex-direction: column; /* Alinea los inputs en una columna */
+    justify-content: center;
+    padding: 20px;
+    background-color: #ffffff; /* Fondo blanco para el formulario */
+    width: 30%;
+    max-width: 90vw; /* Limita el ancho máximo en pantallas pequeñas */
+    height: 60vh;
+    max-height: 80vh; /* Limita la altura máxima en pantallas pequeñas */
+    border-radius: 8px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra ligera */
+  }
+  
+  .input-form-login{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+  }
+  .input-form-login input {
+    width: 100%; /* Asegura que los inputs ocupen el ancho disponible */
+    max-width: 300px; /* Limita el ancho máximo de los inputs */
+    padding: 10px;
+    border: 1px solid #ababab; /* Borde gris claro */
+    border-radius: 4px; /* Esquinas redondeadas en los inputs */
+    font-size: 16px; /* Tamaño de fuente */
+  }
+  
+  .container-btn-login {
+    display: flex;
+    justify-content: center; /* Centra el botón horizontalmente */
+    margin-top: 20px;
+  }
+  
+  .btn-login {
+    padding: 10px 20px;
+    background-color: #007bff; /* Color de fondo del botón */
+    color: white;
+    border: none;
+    border-radius: 4px; /* Esquinas redondeadas */
+    cursor: pointer;
+    font-size: 16px; /* Tamaño de fuente */
+  }
+  
+  .btn-login:hover {
+    background-color: #0056b3; /* Cambia el color al pasar el mouse */
+  }
+  
+  /* Media Queries para hacer el diseño más responsivo */
+  @media (max-width: 768px) {
+    .container-all-login{
+      margin-top: 10vh;
+    }
+    .form-login {
+      width: 80vw; /* Aumenta el ancho del formulario en pantallas más pequeñas */
+      height: auto; /* Ajusta la altura automáticamente */
+    }
+  
+    .input-form-login input {
+      max-width: 100%; /* Permite que los inputs ocupen el 100% del ancho disponible */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .form-login {
+      width: 90vw; /* Casi el ancho completo de la pantalla en dispositivos muy pequeños */
+      padding: 10px; /* Reduce el padding para ganar espacio */
+    }
+  
+    .btn-login {
+      width: 100%; /* Botón ocupa el ancho completo */
+      padding: 15px; /* Aumenta el padding para hacerlo más fácil de tocar en pantallas pequeñas */
+    }
+  }
+  

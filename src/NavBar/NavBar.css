@@ -66,6 +66,7 @@
     position: relative;
 }
 
+
 .carrito-count {
     position: absolute;
     top: 2px;
@@ -120,9 +121,29 @@
 }
 
 
+nav .dropdown-side .dropdown-menu{
+    background-color: var(--color5);
+    width: 15vw;
+    height: auto;
+    margin-top: 10px;
 
+}
 /* Estilos específicos para pantallas móviles */
 @media (max-width: 768px) {
+ 
+    
+    .dropdown-side .dropdown-menu {
+    
+        opacity: 0;
+        top: 0;
+        margin-left: 0.5rem;
+    }
+    
+    .dropdown-side.show .dropdown-menu {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    
     
 .menu-icon {
     background-color: var(--color5);

@@ -43,32 +43,31 @@ export const fetchPost = async (url, data) => {
   };
   
 
-   export const fetchPut = async (url, token, bodi) =>{
-       try {
-        const token = localStorage.getItem('token');
-              const res = await fetch(url, {
-                  method: "PUT",
-                  headers: {
-                      "Content-Type": "application/json",
-                      ...(token && { "Authorization": `Bearer ${token}` })
-                  },
-                  body: JSON.stringify(bodi),
-              });
-              if (res.ok) {
-                  return await res.json();
-              } else {
-                  // Manejar el caso de respuesta no exitosa aquí
-                  console.log("Error en la solicitud HTTP:", res.status, res.statusText);
-              }
-          } catch (error) {
-           console.error(`Error en el fetch al intentar editar el elemento `, error);
-           throw error;
-          }
-      }
+  export const fetchPut = async (url, bodi, token = localStorage.getItem('token')) => {
+    try {
+        const res = await fetch(url, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                ...(token && { "Authorization": `Bearer ${token}` })
+            },
+            body: JSON.stringify(bodi),
+        });
+        if (res.ok) {
+            return await res.json();
+        } else {
+            const errorData = await res.json();
+            throw new Error(errorData.message || 'Error al realizar la operación');
+        }
+    } catch (error) {
+        console.error("Error en el fetch al intentar editar el elemento", error);
+        throw error;
+    }
+};
 
-     export const fetchPatCh = async (url, token) =>{
+
+     export const fetchPatch = async (url, token = localStorage.getItem('token')) =>{
        try {
-        const token = localStorage.getItem('token');
         
               const res = await fetch(url, {
                   method: "PATCH",
@@ -80,18 +79,18 @@ export const fetchPost = async (url, data) => {
               if (res.ok) {
                   return await res.json();
               } else {
-                  // Manejar el caso de respuesta no exitosa aquí
-                  console.log("Error en la solicitud HTTP:", res.status, res.statusText);
-              }
+                const errorData = await res.json();
+                throw new Error(errorData.message || 'Error al realizar la operación');
+            }
+            
           } catch (error) {
            console.error(`Error en el fetch al intentar reactivar el elemento `, error);
            throw error;
           }
       }
 
-    export  const fetchDelete = async (url, token) =>{
+    export  const fetchDelete = async (url, token = localStorage.getItem('token')) =>{
        try {
-        const token = localStorage.getItem('token');
               const res = await fetch(url, {
                   method: "DELETE",
                   headers: {
@@ -102,8 +101,6 @@ export const fetchPost = async (url, data) => {
               if (res.ok) {
                   return await res.json();
               } else {
-                  // Manejar el caso de respuesta no exitosa aquí
-                  console.log("Error en la solicitud HTTP:", res.status, res.statusText);
                const errorData = await res.json();
                throw new Error(errorData.message || 'Error al eliminar el producto');            
               }

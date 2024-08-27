@@ -12,22 +12,13 @@ import { GrUserAdmin } from "react-icons/gr";
 import { MdOutlineAddModerator } from "react-icons/md";
 function NavBar() {
     const navigator = useNavigate();
-    const { datos, perfilReload } = useContext(contexto);
-    const { userActiv, perfil } = datos || {};
+    const { datos } = useContext(contexto);
     const { carrito } = datos;
     const [menuOpen, setMenuOpen] = useState(false);
-    const { handleLogout } = useAuth();
     const [clicked, setClicked] = useState(false);
     const [menuDropdow, setMenuDropdow] = useState(false);
 
     const totalProductos = carrito.reduce((total, producto) => total + producto.cantidad, 0);
-
-    useEffect(() => {
-        if (userActiv && !perfil) {
-            perfilReload();
-        }
-       
-    }, [userActiv, perfil])
 
     useEffect(() => {
         if (!clicked) {
@@ -100,12 +91,12 @@ function NavBar() {
                         </NavLink>
                     </li>
                 </div>
-                {userActiv ? (
+                {datos.perfil ? (
                     <div className="carrito-icon">
                         <h5><GrUserAdmin className='icon-user' /></h5>
                     </div>
                 ) : null}
-                {userActiv && userActiv.role === 'admin' ? (
+                {datos.perfil && datos.perfil.role === 'admin' ? (
                     <NavDropdown
                         id='menu-dropDown'
                         title='Administración'

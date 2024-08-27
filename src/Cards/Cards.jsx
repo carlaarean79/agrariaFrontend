@@ -105,7 +105,7 @@ function Cards({ dato }) {
             <h1>{item.name}</h1>
             <p>{item.detalle}</p>
             <h3>$ {item.price}</h3>
-            {datos.userActiv && (
+            {datos.perfil && (
               <div className="admin-actions">
                 <button onClick={() => handleEdit(item)} className="edit-button">
                   <FaEdit /> Editar

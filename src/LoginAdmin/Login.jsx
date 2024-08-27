@@ -1,12 +1,8 @@
-import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useAuth } from "../Contexto/AuthContext";
-import { contexto } from "../Contexto/Contexto";
 import './Login.css';
 function Login() {
-  const navigate = useNavigate();
-  const { datos, setDatos } = useContext(contexto); // Añadido `setDatos` para actualizar el contexto
-  const { login, fetchProfile } = useAuth();
+  const { login } = useAuth();
   const [loginData, setLoginData] = useState({ email: '', password: '', role: '' });
   const { email, password, role } = loginData;
 
@@ -23,22 +19,7 @@ function Login() {
       alert("Los campos deben completarse");
       return;
     }
-
-    try {
-      const token = await login(email, password, role);
-      const userProfile = await fetchProfile(token);
-
-      setDatos(datos => ({
-        ...datos,
-        userActiv: userProfile,
-        refresh: true
-      }));
-      navigate('/perfil/admin');
-
-
-    } catch (error) {
-      alert(error.message);
-    }
+    login(email, password, role);
   };
 
   return (

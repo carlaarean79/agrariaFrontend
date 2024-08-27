@@ -12,7 +12,6 @@ export const ProviderContext = ({ children }) => {
     productos: [],
     carrito: [],
     usuarios: [],
-    userActiv: null,
     perfil:[],
     refresh: true,
     
@@ -93,41 +92,7 @@ export const ProviderContext = ({ children }) => {
       };
       fetchData();
     }
-  }, [datos.refresh]);
-
-  const perfilReload = async () => {
-    try {
-      const perfilActual = await fetchGet(`${URL_USUARIOS}/${datos.userActiv?.sub}`, localStorage.getItem('token'));
-  
-      if (perfilActual) {
-        setDatos(prevDatos => ({
-          ...prevDatos,
-          perfil: perfilActual,
-         
-        }));
-      }
-    } catch (error) {
-      console.error("Error al recargar el perfil:", error);
-    }
-  };
-  
-  const handleLogout = async () => {
-    await logout();
-    setDatos(prevDatos => ({
-        ...prevDatos,
-        userActiv: null,
-        perfil: [],
-        refresh: true,  // Forzar la actualización de la página
-    }));
-    navigator('/');  // Redirigir a la página principal o a la página de inicio de sesión
-};
-
-  useEffect(() => {
-    if (datos.userActiv) {
-      perfilReload();
-    }
-  }, [datos.userActiv]);
-  
+  }, [datos.refresh]);  
 
   const agregarAlCarrito = (producto, cantidad) => {
     setDatos(prevDatos => {
@@ -152,7 +117,7 @@ export const ProviderContext = ({ children }) => {
   };
 
   return (
-    <contexto.Provider value={{ datos, setDatos, agregarAlCarrito, vaciarCarrito, editarProducto, eliminarProducto, perfilReload, handleLogout }}>
+    <contexto.Provider value={{ datos, setDatos, agregarAlCarrito, vaciarCarrito, editarProducto, eliminarProducto }}>
       {children}
     </contexto.Provider>
   );

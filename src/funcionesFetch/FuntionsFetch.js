@@ -8,8 +8,12 @@ export const fetchGet = async (url, token) => {
                  'Authorization': `Bearer ${token}`
             }
         })
-        return await res.json();
+        if (!res.ok) {
+            throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+            return await res.json();
     } catch (error) {
+        console.error(`Fetch error: ${error.message}`);
         throw error;
 
     }

@@ -5,15 +5,9 @@ import { contexto } from "../Contexto/Contexto";
 import { FiLogOut } from 'react-icons/fi';
 
 function Perfil() {
-    const { datos, perfilReload } = useContext(contexto);
-    const { userActiv, perfil } = datos || {}; // Verifica si datos es undefined
+    const { datos } = useContext(contexto);
+    const perfil = datos.perfil
     const { logout } = useAuth();
-
-    useEffect(() => {
-        if (userActiv) {
-            perfilReload(); // Llama al método perfilReload del contexto
-        }
-    }, [userActiv]);
 
     return (
         <div className="containerAll-Form-perfil">

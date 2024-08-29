@@ -19,7 +19,6 @@ function Home() {
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit quasi quia, vero maxime dolore perferendis earum laboriosam animi provident, totam accusantium esse! Nesciunt reiciendis delectus sit? Distinctio adipisci sint accusamus?</p>
 
                 </div>
-                 <GaleriaImg/>
             </div>
             <div className='parallax-2'>
                 <div className='caption'>
@@ -31,6 +30,10 @@ function Home() {
                 <div className="titulo-card">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit quasi quia, vero maxime dolore perferendis earum laboriosam animi provident, totam accusantium esse! Nesciunt reiciendis delectus sit? Distinctio adipisci sint accusamus?</p>
                 </div>
+            </div>
+            <div className='parallax-3'>
+               
+            {/*      <GaleriaImg/>  */}
             </div>
         </div>
     );

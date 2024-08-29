@@ -6,7 +6,7 @@ import './GaleriaImg.css'
 const GaleriaImg = () => {
   const { datos } = useContext(contexto);
   const [currentPage, setCurrentPage] = useState(1);
-  const imagesPerPage = 3;
+  const imagesPerPage = 2;
 
   // Calcula el total de pag. divide la cant. de img del contexto por las que quiero mostrar
   //math.ceil: redondea redondea hacia arriba al número entero más cercano.

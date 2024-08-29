@@ -48,19 +48,23 @@ function Productos({ categoria }) {
         </div>
       </div>
       <div className="productos">
-        {Object.keys(orderProducts).map((categoria) => (
-          <div className="categorias" key={categoria}>
-            <h2>{categoria}</h2>
-            <div>
-              {orderProducts[categoria].length > 0 ? (
-                <Cards dato={orderProducts[categoria]} />
-              ) : (
-                <p>No hay productos en esta categoría.</p>
-              )}
-            </div>
-          </div>
-        ))}
+  {Object.keys(orderProducts).map((categoria) => (
+    <div className="categorias" key={categoria}>
+      <h2>{categoria}</h2>
+      <div className="cards">
+        {orderProducts[categoria].length > 0 ? (
+          orderProducts[categoria].map((producto) => (
+            <Cards key={producto.id} producto={producto} />
+          ))
+        ) : (
+          <p>No hay productos en esta categoría.</p>
+        )}
       </div>
+    </div>
+  ))}
+</div>
+
+
     </div>
   );
 }

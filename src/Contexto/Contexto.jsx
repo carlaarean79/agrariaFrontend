@@ -21,45 +21,8 @@ export const ProviderContext = ({ children }) => {
     setDatos(prevDatos => ({ ...prevDatos, carrito: [] }));
   };
   
-  const editarProducto = async (productoEditado) => {
-    try {
-      const token = localStorage.getItem('token');
-      await fetch(`${URL_PRODUCTOS}/${productoEditado.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify(productoEditado),
-      });
-      setDatos(prevDatos => ({
-        ...prevDatos,
-        productos: prevDatos.productos.map(producto => 
-          producto.id === productoEditado.id ? productoEditado : producto
-        ),
-      }));
-    } catch (error) {
-      console.error('Error al editar el producto:', error);
-    }
-  };
+ 
   
-  const eliminarProducto = async (productoId) => {
-    try {
-      const token = localStorage.getItem('token');
-      await fetch(`${URL_PRODUCTOS}/${productoId}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        },
-      });
-      setDatos(prevDatos => ({
-        ...prevDatos,
-        productos: prevDatos.productos.filter(producto => producto.id !== productoId),
-      }));
-    } catch (error) {
-      console.error('Error al eliminar el producto:', error);
-    }
-  };
   
 
   useEffect(() => {
@@ -117,7 +80,7 @@ export const ProviderContext = ({ children }) => {
   };
 
   return (
-    <contexto.Provider value={{ datos, setDatos, agregarAlCarrito, vaciarCarrito, editarProducto, eliminarProducto }}>
+    <contexto.Provider value={{ datos, setDatos, agregarAlCarrito, vaciarCarrito }}>
       {children}
     </contexto.Provider>
   );

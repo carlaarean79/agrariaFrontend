@@ -93,23 +93,35 @@ export const fetchPost = async (url, data) => {
           }
       }
 
-    export  const fetchDelete = async (url, token = localStorage.getItem('token')) =>{
-       try {
-              const res = await fetch(url, {
-                  method: "DELETE",
-                  headers: {
-                      "Content-Type": "application/json",
-                      ...(token && { "Authorization": `Bearer ${token}` })
-                  }
-              });
-              if (res.ok) {
-                  return await res.json();
-              } else {
-               const errorData = await res.json();
-               throw new Error(errorData.message || 'Error al eliminar el producto');            
-              }
-          } catch (error) {
-           console.error(`Error en el fetch al intentar borrar el elemento `, error);
-           throw error;
+      export const fetchDelete = async (url, token = localStorage.getItem('token')) => {
+        try {
+          const res = await fetch(url, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              ...(token && { "Authorization": `Bearer ${token}` })
+            }
+          });
+      
+          // Verifica el tipo de contenido
+          const contentType = res.headers.get("Content-Type");
+          let responseData;
+          
+          if (contentType && contentType.includes("application/json")) {
+            responseData = await res.json();
+          } else {
+            responseData = await res.text();
           }
-      }
+          
+          if (res.ok) {
+            return responseData;
+          } else {
+            throw new Error(responseData.message || 'Error al eliminar el producto');
+          }
+        } catch (error) {
+          console.error(`Error en el fetch al intentar borrar el elemento: `, error);
+          throw error;
+        }
+      };
+      
+            

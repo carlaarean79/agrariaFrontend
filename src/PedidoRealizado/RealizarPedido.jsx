@@ -1,7 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { contexto } from '../Contexto/Contexto';
 import { useNavigate } from 'react-router-dom';
-import './PedidoRealizado.css'
+import './PedidoRealizado.css';
+import { fetchPost } from '../funcionesFetch/FuntionsFetch';
+import { URL_PEDIDO, URL_USUARIOS } from '../Endpoints/endopints';
 
 function RealizarPedido() {
   const { datos, vaciarCarrito } = useContext(contexto);
@@ -14,65 +16,59 @@ function RealizarPedido() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  
   const savePedido = async (userPrueba) => {
     try {
-      console.log(formData);
-      const response = await fetch('http://localhost:3000/pedido', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const data = {
+        fecha: new Date(),  // Asegúrate de que esto sea una instancia de Date
+        detalle: carrito.map(producto => `${producto.name}: ${producto.cantidad}`).join(', '),
+        user: {
+          id: userPrueba.id,  // Asegúrate de que solo envíes el ID si el backend espera solo el ID
         },
-        body: JSON.stringify({
-          fecha: new Date(),
-          detalle: carrito.map(producto => `${producto.name}: ${producto.cantidad}`).join(', '),
-          user: userPrueba, // Asegúrate de que este sea el usuario correcto
-          pedidosProducto: carrito.map(producto => ({
-            producto: producto.id,
-            cantidad: producto.cantidad,
-          })),
-        }),
-      });
+        pedidoProducto: carrito.map(producto => ({
+          producto: {
+            id: producto.id  // Asegúrate de que esto coincida con la estructura esperada en PedidoProductoDto
+          },
+          cantidad: producto.cantidad
+        })),
+      };
       
-      if (!response.ok) {
-        throw new Error('Error al guardar el pedido');
-      }
-      
-      const data = await response.json();
-      console.log('Pedido guardado:', data);
-      return data;
+  
+      console.log('Datos del pedido:', data);
+  
+      const response = await fetchPost(URL_PEDIDO, localStorage.getItem('token'), data);
+      return response;
     } catch (error) {
-      console.error(error);
+      console.error('Error al guardar el pedido:', error);
+      throw error;
     }
   };
-  
 
   const saveUsuario = async () => {
     try {
-      const response = await fetch('http://localhost:3000/users', {
+      const body = {
+        name: formData.name,
+        lastname: formData.lastname,
+      };
+
+    
+      const response = await fetch(URL_USUARIOS, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          
         },
-        body: JSON.stringify({
-          name: formData.name,
-          lastname: formData.lastname,
-       
-        }),
+        body: JSON.stringify(body),
       });
 
       if (!response.ok) {
-        throw new Error('Error al guardar el usuario');
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
-
-      const data = await response.json();
-      console.log('usuario guardado:', data);
-      return data;
+  
+      return response.json(); // Asegúrate de convertir a JSON
     } catch (error) {
-      console.error(error);
+      console.error('Error al guardar el usuario:', error);
     }
   };
-
   const getPhoneNumber = async () => {
     try {
       const resp = await fetch('http://localhost:3000/whatsapp-send/number');
@@ -85,48 +81,57 @@ function RealizarPedido() {
     }
   };
 
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const usuarioData = await saveUsuario();
-    if(usuarioData){
-      setFormData(usuarioData)
-      console.log(setFormData);
-      
-      const pedidoData = await savePedido(usuarioData);
-
-      if (pedidoData ) {
-        const phoneNumberData = await getPhoneNumber(); // Obtener el número de teléfono
-        
-        if (phoneNumberData) { // Asegúrate de que el número se haya obtenido correctamente
-          const mensajePedido = generarMensajePedido(carrito, formData);
-          const whatsappLink = `https://wa.me/${phoneNumberData}?text=${encodeURIComponent(mensajePedido)}`;
-          window.open(whatsappLink, '_blank');
-          navigate('/');
-          vaciarCarrito(); // Vaciar el carrito después de enviar el pedido
-          setFormData({ name: '', lastname: ''}); // Vaciar el formulario
-        } else {
-          console.error('No se obtuvo el número de teléfono');
-        }
-      } 
-    }
-  };
-
-
-
   function generarMensajePedido(pedido, datos) {
     const productos = pedido.map(producto => `${producto.cantidad}  ${producto.name}: ${producto.price} ${producto.detalle }`).join('\n');
     return `Hola! Me gustaría realizar el siguiente pedido:\n${productos}\n\nDatos del usuario:\nNombre: ${datos.name} ${datos.lastname}`;
 
   }
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    try {
+      // Obtener datos del usuario
+      const usuarioData = await saveUsuario();
+      if (!usuarioData) {
+        console.error('No se obtuvo información del usuario');
+        return;
+      }
+  
+      // Crear el pedido
+      const pedidoData = await savePedido(usuarioData);
+      if (!pedidoData) {
+        console.error('No se pudo guardar el pedido');
+        return;
+      }
+  
+      // Obtener el número de teléfono
+      const phoneNumberData = await getPhoneNumber();
+      if (!phoneNumberData) {
+        console.error('No se obtuvo el número de teléfono');
+        return;
+      }
+  
+      // Generar el mensaje y abrir el enlace de WhatsApp
+      const mensajePedido = generarMensajePedido(carrito, formData);
+      const whatsappLink = `https://wa.me/${phoneNumberData}?text=${encodeURIComponent(mensajePedido)}`;
+      window.open(whatsappLink, '_blank');
+  
+      // Redirigir y limpiar
+      navigate('/');
+      vaciarCarrito();
+      setFormData({ name: '', lastname: '' });
+    } catch (error) {
+      console.error('Error al procesar el pedido:', error);
+    }
+  };
+  
   const handleCancel = () => {
     vaciarCarrito();
     navigate(-1); // Regresa a la página anterior
   };
 
   return (
-    <div >
+    <div>
       <h2 className='h2-form-pedido'>Realizar Pedido</h2>
       <form onSubmit={handleSubmit} className='form-pedido'>
         <div className='input-form'>
@@ -151,7 +156,6 @@ function RealizarPedido() {
       </form>
     </div>
   );
-  
 }
 
 export default RealizarPedido;

@@ -20,31 +20,25 @@ export const fetchGet = async (url, token) => {
 
 }
 
-export const fetchPost = async (url, data) => {
-    try {
-        const token = localStorage.getItem('token');
-        console.log('Token recuperado:', token); // Verifica el token recuperado
-        
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}` // Si necesitas enviar un token, sino, puedes eliminar esta línea
-        },
-        body: JSON.stringify(data),
-      });
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-  
-      const result = await response.json();
-      return result;
-    } catch (error) {
-      console.error('Error en la solicitud HTTP:', error);
-      throw error;
-    }
-  };
+export const fetchPost = async (url, token, data) => {
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error('Error en la solicitud HTTP:', errorText);
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+
+  return await response.json();
+};
+
   
 
   export const fetchPut = async (url, bodi, token = localStorage.getItem('token')) => {

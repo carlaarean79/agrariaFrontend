@@ -1,41 +1,62 @@
 .cards {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  width: 100%;
+  justify-content: stretch;
+  padding: 10px;
+
+  
 }
+
+.cards-container {
+  width: 200px; /* Ancho fijo */
+  height: 400px; /* Alto fijo */
+  margin: 10px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+
 
 .cards-item {
-  background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0px 4px rgba(0, 0, 0, 0.25);
-  overflow: hidden;
-  width: 20vw;
-  /* Tamaño fijo de las tarjetas */
-  height: 30vh;
-  display: flex;
-  justify-content: space-between;
-  align-items:baseline;
-  transition: transform 0.3s ease;
+height: 20vh;
+object-fit: cover;
+cursor:pointer;
 }
+
 
 .cards-item img {
-  width: 100%;
-  /* Asegura que la imagen cubra todo el ancho del contenedor */
-  height: 100%;
-  object-fit: cover;
-  cursor: pointer;
-}
-
-.titulo{
-  width: 100%;
+  display: block;
+  margin-bottom: 10px;
   overflow: hidden;
 }
+
+
 .cards-stock h1 {
   font-family: 'Pathway Gothic One-Regular';
   font-size: 1.5rem;
   padding-top: 5px;
 }
+.titulo {
+  text-align: center;
+  padding: 10px 0;
+  flex-grow: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.titulo .detalle  {
+  flex-grow: 1;
+  overflow: hidden;
+  font-size: 0.7rem;
+}
+
+
 
 .titulo p,
 .titulo h3 {
@@ -46,6 +67,66 @@
 .titulo h3,
 .titulo h1 {
   font-weight: bold;
+}
+
+.titulo h3 {
+  background-color: black;
+  color: white; /* Asegura que el texto sea visible sobre el fondo negro */
+  width: 100%;
+  padding: 0.5rem; /* Añade algo de relleno para mejorar la apariencia */
+  text-align: center; /* Centra el texto */
+}
+
+.admin-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.edit-button, .delete-button {
+  border-radius: 10px;
+}
+
+.edit-button:hover, .delete-button:hover{
+  background-color: var(--color1);
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/*modal edit*/
+
+.form-modal-edit{
+  
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+}
+
+.inputs-modal-edit, .input-img-modal-edit{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+ 
+}
+label{
+  padding-top: 20px;
+  font-family: "Odor Mean Chey", serif;
+}
+.img-modal-edit{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+.img-modal-edit img{
+  width: 50%;
+  height: auto;
 }
 
 
@@ -59,8 +140,6 @@
   .titulo h3 {
     font-size: 0.8rem;
   }
-  .cards-item {
-    width: 40vw;
-  }
+ 
 }
 

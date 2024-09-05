@@ -20,14 +20,13 @@ export const fetchGet = async (url, token) => {
 
 }
 
-export const fetchPost = async (url, token, data) => {
+export const fetchPost = async (url, data) => {
   const response = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
 
   if (!response.ok) {
@@ -38,6 +37,7 @@ export const fetchPost = async (url, token, data) => {
 
   return await response.json();
 };
+
 
   
 

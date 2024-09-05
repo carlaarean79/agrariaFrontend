@@ -1,0 +1,83 @@
+.containerAll-Form-perfil{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+   margin-top: 20px;
+}
+
+.container-perfil{
+    width: 60%;
+    height:70vh;
+    text-align: center;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+ .h3-nombre-perfil{
+    text-align: center;
+}
+.ul-perfil li{
+   list-style-type: none;
+   width: 95%;
+
+}
+
+ .ul-perfil h3 {
+    padding: 20px;
+    display: flex;
+    font-size: clamp(0.8rem, 1.5vw, 3.5rem) !important;
+}
+
+
+ .perfil ul li h3, .ul-perfil h3, .container-perfil{
+    border: 1px solid #ddd;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+.button-cerrarsesion{
+    overflow: hidden;
+    width: 95%;
+    height: auto;
+    padding: 20px;
+    display: flex;
+    align-content: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  
+}
+
+.button-cerrarsesion button{
+    border-radius: 10px;
+    background-color: var(--color8);
+    height: 40px;
+    width: 200px;
+    margin: 5px;
+}
+
+.button-cerrarsesion button:hover{
+    border-radius: 20px;
+    background-color: var(--color6);
+}
+
+.admin-actions-modal-pedidos{
+    display: flex;
+    flex-direction: column;
+}
+@media(max-width:780px){
+    .containerAll-Form-perfil{
+        margin-top: 120px;
+    }
+    
+    .container-perfil{
+        height: auto;
+        width: 80%;
+      
+    }
+
+    .button-cerrarsesion button{
+        height: 40px;
+        width: 150px;
+        flex-direction: column;
+       
+    }
+}

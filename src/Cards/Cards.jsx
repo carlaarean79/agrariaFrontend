@@ -2,10 +2,11 @@ import React, { useContext, useState } from 'react';
 import './Cards.css';
 import Modal from '../Modal/Modal';
 import { contexto } from '../Contexto/Contexto';
-import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa';
-import { fetchDelete, fetchPut } from '../funcionesFetch/FuntionsFetch';
+import { FaEdit, FaTrash } from 'react-icons/fa';
+import { fetchDelete } from '../funcionesFetch/FuntionsFetch';
 import { URL_PRODUCTOS } from '../Endpoints/endopints';
-import AlertProducto from '../AlertProducto/AlertProducto';
+import Alerta from '../AlertProducto/AlertProducto';
+import Button from '../Button/Button';
 
 function Cards({ producto }) {
   if (!producto) {
@@ -23,7 +24,7 @@ function Cards({ producto }) {
     imagen: '',
     price: '',
     detalle: '',
-    stock:0
+    stock: 0
   });
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -42,64 +43,33 @@ function Cards({ producto }) {
 
   const handleEditChange = (e) => {
     const { name, value } = e.target;
-
-    // Asegura que el valor sea un número válido cuando el nombre es 'price'
     setEditProducto((prev) => ({
       ...prev,
       [name]: name === "price" ? parseFloat(value) || 0 : value,
     }));
   };
 
-
-
-  const handleSave = async (e) => {
-    e.preventDefault();
-    setIsSaving(true);
-    try {
-      console.log('Datos que se envían:', editProducto);
-      const response = await fetchPut(`${URL_PRODUCTOS}/${producto.id}`, editProducto, localStorage.getItem('token'));
-      console.log('Respuesta del servidor:', response);
-      if (response) {
-        setDatos((prev) => ({ ...prev, refresh: true }));
-        setIsEditing(false); // Cerrar el modal de edición después de guardar
-      }
-    } catch (error) {
-      console.error('Error al editar:', error);
-      throw new Error(error.message + ' Error al editar');
-    } finally {
-      setIsSaving(false);
-    }
-  };
-
   const deleteProducto = () => {
     setAlerta({
-      estado: true, tipo: 'eliminar',
-      idTexto: 'eliminar', mensaje: '¿Seguro que quiere eliminar esta sucursal?'
+      estado: true, 
+      tipo: 'eliminar',
+      idTexto: 'eliminar', 
+      mensaje: '¿Seguro que quiere eliminar este producto?'
     });
   };
 
   const handleAlertAction = async (action) => {
-    switch (action) {
-      case 'editar':
-        setIsEditing(true); // Abrir el modal si se confirma la edición
-        setAlerta({ estado: false, tipo: '', idTexto: '' });
-        break;
-      case 'eliminar':
-        try {
-          const response = await fetchDelete(`${URL_PRODUCTOS}/${producto.id}`, localStorage.getItem('token'));
-          if (response) {
-            setDatos((prev) => ({ ...prev, refresh: true }));
-            setAlerta({ estado: false, tipo: '', idTexto: '' });
-          }
-        } catch (error) {
-          throw new Error("Error al eliminar");
+    if (action === 'eliminar') {
+      try {
+        const response = await fetchDelete(`${URL_PRODUCTOS}/${producto.id}`, localStorage.getItem('token'));
+        if (response) {
+          setDatos((prev) => ({ ...prev, refresh: true }));
         }
-        break;
-      case 'cancelar':
-      default:
-        setAlerta({ estado: false, tipo: '', idTexto: '' });
-        break;
+      } catch (error) {
+        console.error("Error al eliminar el producto", error);
+      }
     }
+    setAlerta({ estado: false, tipo: '', idTexto: '', mensaje: '' });
   };
 
   const handleProductClick = () => {
@@ -121,11 +91,9 @@ function Cards({ producto }) {
         alert('La cantidad solicitada excede el stock disponible.');
         return;
       }
-      
-      // Aquí puedes agregar la lógica para agregar al carrito
+
       agregarAlCarrito({ ...selectedProduct, price: selectedProduct.price }, quantity);
-  
-      // Decrementar el stock en el backend
+
       try {
         const response = await fetch(`${URL_PRODUCTOS}/${selectedProduct.id}/stock`, {
           method: 'PUT',
@@ -133,11 +101,10 @@ function Cards({ producto }) {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
           },
-          body: JSON.stringify({ stock: selectedProduct.stock - quantity }) // Decrementar stock
+          body: JSON.stringify({ stock: selectedProduct.stock - quantity }) 
         });
-  
+
         if (response.ok) {
-          // Actualizar la vista del producto con el nuevo stock
           setDatos((prev) => ({ ...prev, refresh: true }));
           setModalOpen(false);
         } else {
@@ -148,24 +115,21 @@ function Cards({ producto }) {
       }
     }
   };
-  
 
   const handleSaveStock = async (e) => {
     e.preventDefault();
     setIsSaving(true);
     try {
-      // Realiza una solicitud PUT para actualizar el stock
       const response = await fetch(`${URL_PRODUCTOS}/${producto.id}/stock`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
-        body: JSON.stringify({ stock: editProducto.stock }) // Enviar el nuevo stock
+        body: JSON.stringify({ stock: editProducto.stock })
       });
-  
+
       if (response.ok) {
-        const updatedProduct = await response.json();
         setDatos((prev) => ({ ...prev, refresh: true }));
         setIsEditing(false);
       } else {
@@ -177,54 +141,65 @@ function Cards({ producto }) {
       setIsSaving(false);
     }
   };
-  
 
   return (
-    <div >
+    <div className='cards'>
       {isEditing && (
         <Modal isOpen={isEditing} onClose={() => setIsEditing(false)}>
           {isSaving ? (
             <h1>Cargando...</h1>
           ) : (
-            <div>
+            <div className='container-all-input-edit'>
               <h2>Editar Producto</h2>
-              <form>
-                <label>Nombre</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={editProducto.name}
-                  onChange={handleEditChange}
-                />
-                <label>Detalle</label>
-                <input
-                  type="text"
-                  name="detalle"
-                  value={editProducto.detalle}
-                  onChange={handleEditChange}
-                />
-                <label>Precio</label>
-                <input
-                  type="number"
-                  name="price"
-                  value={editProducto.price}
-                  onChange={handleEditChange}
-                />
-                 <label>Stock</label>
-                <input
-                  type="number"
-                  name="stock"
-                  value={editProducto.stock}
-                  onChange={handleEditChange}
-                />
-                <label>Imagen URL</label>
-                <input
-                  type="text"
-                  name="imagen"
-                  value={editProducto.imagen}
-                  onChange={handleEditChange}
-                />
-                <button type="button" onClick={handleSaveStock}>Guardar Cambios</button>
+
+              <form className='form-modal-edit'>
+                <div className="img-modal-edit">
+                  <img src={editProducto.imagen} />
+                </div>
+                <div className="input-img-modal-edit">
+                  <label>Imagen URL</label>
+                  <input
+                    type="text"
+                    name="imagen"
+                    value={editProducto.imagen}
+                    onChange={handleEditChange}
+                  />
+                </div>
+                <div className="inputs-modal-edit">
+                  <label>Nombre</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={editProducto.name}
+                    onChange={handleEditChange}
+                  />
+                  <label>Detalle</label>
+                  <input
+                    type="text"
+                    name="detalle"
+                    value={editProducto.detalle}
+                    onChange={handleEditChange}
+                  />
+                  <label>Precio</label>
+                  <input
+                    type="number"
+                    name="price"
+                    value={editProducto.price}
+                    onChange={handleEditChange}
+                  />
+                  <label>Stock</label>
+                  <input
+                    type="number"
+                    name="stock"
+                    value={editProducto.stock}
+                    onChange={handleEditChange}
+                  />
+                </div>
+                <div>
+                  <button className="add-to-cart-button" type="button" onClick={handleSaveStock}>
+                    Guardar Cambios
+                  </button>
+                </div>
               </form>
             </div>
           )}
@@ -259,43 +234,39 @@ function Cards({ producto }) {
         </Modal>
       )}
 
-      <div className="cards">
-        <div className="cards-container">
-          <div className="cards-stock">
-            <h1>{producto.name}</h1>
-          </div>
+      <div className="cards-container">
+        <div className="cards-stock">
+          <h1>{producto.name}</h1>
+        </div>
+        <img className={'cards-item'} src={producto.imagen} alt={`Imagen ${producto.name}`} onClick={handleProductClick} />
+        <div className="titulo">
+          <p>Stock: {producto.stock}</p>
+          <p className='detalle'>{producto.detalle}</p>
+          <h3>$ {producto.price}</h3>
+        </div>
 
-          <div className="cards-item" onClick={handleProductClick}>
-            <img src={producto.imagen} alt={`Imagen ${producto.name}`} />
+        {datos.perfil && datos.perfil.role === 'admin' && (
+          <div className="admin-actions">
+            <button onClick={startEditing} className="edit-button">
+              <FaEdit />
+            </button>
+            <button onClick={deleteProducto} className="delete-button">
+              <FaTrash />
+            </button>
           </div>
-      
-          <div className="titulo">
-            <p>Stock: {producto.stock}</p>
-            <p>{producto.detalle}</p>
-            <h3>$ {producto.price}</h3>
-        
-          </div>
-          {datos.perfil && datos.perfil.role === 'admin' && (
-            <div className="admin-actions">
-              <button onClick={startEditing} className="edit-button">
-                <FaEdit /> Editar
-              </button>
-              <button onClick={deleteProducto} className="delete-button">
-                <FaTrash /> Eliminar
-              </button>
-            </div>
-          )}
-          </div>
+        )}
       </div>
 
       {alerta.estado && (
-        <AlertProducto
-          setAlerta={setAlerta}
-          idTexto={alerta.idTexto}
-          handleAlertAction={handleAlertAction}
-          mensaje={alerta.mensaje}
-        />
-      )}
+  <Alerta
+    isOpen={alerta.estado}
+    texto={alerta.mensaje}
+    proceso={alerta.tipo}
+    onConfirm={() => handleAlertAction(alerta.idTexto)}  // Aquí llamas a la función cuando se confirme
+    onCancel={() => setAlerta({ estado: false, tipo: '', idTexto: '', mensaje: '' })}  // Aquí manejas la cancelación
+  />
+)}
+
     </div>
   );
 }

@@ -1,0 +1,75 @@
+.transparenteAlerta{
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(0%, 0%);
+    z-index: 9980;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color6);
+    overflow: none;
+}
+.alertaEliminar{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9992;
+    float: inline-start;
+    width: 60vw;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    justify-content: center;
+    background-color: var(--color2);
+    color: var(--color1);
+    border: 1px solid var(--color1);
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px var(--color1);
+}
+
+.boton-alerta-pedido{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem 1rem 1rem 0;
+    align-items: center;
+}
+
+.botonSiNo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    align-items: center;
+}
+
+.formulario-alerta{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 2rem;
+}
+
+.formulario-alerta input,
+.formulario-alerta label{
+    width: 100%;
+    text-align: start;
+}
+
+.renglonInput-alerta,
+.renglonInput-alerta select{
+    width: 100%;
+    border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+     .botonSiNo{
+        padding: 0.6rem;
+    }
+
+    .alertaEliminar{
+        width: 90vw;
+    }
+}

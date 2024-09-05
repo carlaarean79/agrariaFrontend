@@ -11,7 +11,8 @@ import ContactUs from './FormContacto/FormContacto';
 import Login from './LoginAdmin/Login';
 import Perfil from './LoginAdmin/Perfil';
 import { AuthProvider } from './Contexto/AuthContext';
-import PrivateRoute from './LoginAdmin/PrivateRoute';
+import Pedidos from './PedidosRecibidos/Pedidos';
+import TablaPedidos from './PedidosRecibidos/Pedidos';
 
 function App() {
   return (
@@ -20,18 +21,14 @@ function App() {
         <AuthProvider>
           <NavBar />
           <Routes>
-            {/* Rutas protegidas por el rol de admin */}
-              <Route path="auth/login" element={<Login />} />
-          {/*   <Route path="perfil/admin" element={<PrivateRoute roles={['admin']} />}> */}
-              <Route path="perfil/admin" element={<Perfil />} />
-           {/*  </Route> */}
-
-            {/* Rutas Públicas */}
-            <Route path='/' element={<Home />} />
+                       <Route path="auth/login" element={<Login />} />
+                     <Route path="perfil/admin" element={<Perfil />} />
+                    <Route path='/' element={<Home />} />
             <Route path='productos' element={<Productos />} />
             <Route path='contacto' element={<ContactUs />} />
             <Route path='carrito' element={<Carrito />} />
             <Route path='carrito/pedido' element={<RealizarPedido />} />
+           <Route path='pedidosRealizados' element={<TablaPedidos />} />
 
           </Routes>
           <Footer />

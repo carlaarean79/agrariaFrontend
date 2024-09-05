@@ -123,11 +123,17 @@
 
 nav .dropdown-side .dropdown-menu{
     background-color: var(--color5);
-    width: 15vw;
+    width: 20vw;
     height: auto;
     margin-top: 10px;
+  }
 
-}
+  .dropdown-side .drop-item{
+    text-decoration: none;
+    padding: 10px 20px;
+ 
+  }
+
 /* Estilos específicos para pantallas móviles */
 @media (max-width: 768px) {
  

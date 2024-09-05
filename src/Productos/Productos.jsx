@@ -50,7 +50,10 @@ function Productos({ categoria }) {
       <div className="productos">
   {Object.keys(orderProducts).map((categoria) => (
     <div className="categorias" key={categoria}>
+      <div className="line"></div>
       <h2>{categoria}</h2>
+      <div className="line"></div>
+
       <div className="cards">
         {orderProducts[categoria].length > 0 ? (
           orderProducts[categoria].map((producto) => (

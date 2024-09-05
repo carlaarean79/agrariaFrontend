@@ -37,7 +37,14 @@
 
 .icon-close {
   font-size: 1.8rem; /* Aumenta el tamaño si es necesario */
-  color: #000; /* Asegúrate de que el color sea visible */
+  background-color: var(--color9);
+  border-radius: 100%;
+  color:navajowhite;
+
+}
+
+.icon-close:hover{
+  box-shadow: 0px 4px 4px  rgba(0, 0, 0, 0.276);
 }
 
 .desripcion{

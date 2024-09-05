@@ -14,7 +14,9 @@ export const AuthProvider = ({ children }) => {
     user: null
   });
   useEffect(()=>{
-    fetchProfile(auth.token)
+    if(auth.token){
+      fetchProfile(auth.token)
+    }
   },[]);
 
   useEffect(() => {
@@ -23,18 +25,22 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password, role) => {
     try {
-      const user = { email, password, role }
-      const data = await fetchPost(URL_AUTH_LOGIN_ADMIN, user)
-      if (data){
+      const user = { email, password, role };
+      console.log("Datos de usuario a enviar:", user);
+  
+      const data = await fetchPost(URL_AUTH_LOGIN_ADMIN, user);
+      
+      if (data) {
         localStorage.setItem('token', data.access_token);
         setAuth({ token: data.access_token, user: null });
         fetchProfile(data.access_token);
       }
-    } catch(error){
-      console.log(error);
-      
+    } catch (error) {
+      console.log("Error en login:", error);
     }
   };
+  
+  
 
   const fetchProfile = async (token) => {
     try {

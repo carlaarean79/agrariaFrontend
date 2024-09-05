@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Modal.css';
 import { IoCloseCircleOutline } from "react-icons/io5";
 
 
 function Modal({children, isOpen,onClose}) {
-
     useEffect(()=>{
         if(isOpen){
             document.body.style.overflow = 'hidden';

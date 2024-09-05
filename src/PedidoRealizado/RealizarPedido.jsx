@@ -18,11 +18,12 @@ function RealizarPedido() {
 
   const savePedido = async (userPrueba) => {
     try {
+      console.log(typeof userPrueba.id)
       const data = {
-        fecha: new Date(),  // Asegúrate de que esto sea una instancia de Date
-        detalle: carrito.map(producto => `${producto.name}: ${producto.cantidad}`).join(', '),
+        fecha: new Date(),  
+        detalle: carrito.map(producto => `Cantidad: ${producto.cantidad} Producto: ${producto.name} `).join(', '),
         user: {
-          id: userPrueba.id,  // Asegúrate de que solo envíes el ID si el backend espera solo el ID
+          id: userPrueba.id, 
         },
         pedidoProducto: carrito.map(producto => ({
           producto: {
@@ -31,17 +32,17 @@ function RealizarPedido() {
           cantidad: producto.cantidad
         })),
       };
-      
   
       console.log('Datos del pedido:', data);
   
-      const response = await fetchPost(URL_PEDIDO, localStorage.getItem('token'), data);
+      const response = await fetchPost(URL_PEDIDO, data); 
       return response;
     } catch (error) {
       console.error('Error al guardar el pedido:', error);
       throw error;
     }
   };
+  
 
   const saveUsuario = async () => {
     try {
@@ -73,7 +74,6 @@ function RealizarPedido() {
     try {
       const resp = await fetch('http://localhost:3000/whatsapp-send/number');
       const data = await resp.json();
-      console.log('Datos recibidos:', data);
       return data.phoneNumber;
     } catch (error) {
       console.error('Error al obtener el número de teléfono:', error);
@@ -82,8 +82,9 @@ function RealizarPedido() {
   };
 
   function generarMensajePedido(pedido, datos) {
-    const productos = pedido.map(producto => `${producto.cantidad}  ${producto.name}: ${producto.price} ${producto.detalle }`).join('\n');
-    return `Hola! Me gustaría realizar el siguiente pedido:\n${productos}\n\nDatos del usuario:\nNombre: ${datos.name} ${datos.lastname}`;
+    const productos = pedido.map(producto => `Cantidad: ${producto.cantidad}
+       Producto: ${producto.name} Precio:${producto.price} Detalle: ${producto.detalle }`).join('\n');
+    return `Hola! Me gustaría realizar el siguiente pedido:\n ${productos}\n\nDatos del usuario:\nNombre: ${datos.name} ${datos.lastname}`;
 
   }
   const handleSubmit = async (e) => {
@@ -115,7 +116,7 @@ function RealizarPedido() {
       const mensajePedido = generarMensajePedido(carrito, formData);
       const whatsappLink = `https://wa.me/${phoneNumberData}?text=${encodeURIComponent(mensajePedido)}`;
       window.open(whatsappLink, '_blank');
-  
+ 
       // Redirigir y limpiar
       navigate('/');
       vaciarCarrito();
@@ -124,6 +125,7 @@ function RealizarPedido() {
       console.error('Error al procesar el pedido:', error);
     }
   };
+  
   
   const handleCancel = () => {
     vaciarCarrito();
@@ -145,7 +147,10 @@ function RealizarPedido() {
           <h3>Tu pedido</h3>
           <ul className='detalle-producto-ul'>
             {carrito.map((producto, index) => (
-              <li key={index}>{producto.name} - Cantidad: {producto.cantidad}</li>
+              <ul key={index}>
+              <li> Cantidad: {producto.cantidad}</li>
+              <li >Producto: {producto.name}</li>
+              </ul>
             ))}
           </ul>
         </div>
